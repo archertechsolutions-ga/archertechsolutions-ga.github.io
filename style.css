@@ -44,8 +44,16 @@ h1 {
     margin: 10px auto;
 }
 
+.line-separator-long {
+    width: 500px;
+    height: 1px;
+    background-color: #000;
+    margin: 10px auto;
+}
+
 /* Navigation Menu */
 nav {
+    margin-top: 80px;
     margin-bottom: 80px;
 }
 
