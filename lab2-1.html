@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery ready() and Event Handling</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#btn-calculate").click(function() {
+                //init vals and vars
+                let n1 = parseFloat($("#num1").val());
+                let n2 = parseFloat($("#num2").val());
+                let operator = $("#operator").val();
+                let result = 0;
+
+                // Check if the user left a box blank or entered invalid text
+                if (isNaN(n1) || isNaN(n2)) {
+                    $("#calc-result").text("Please enter numbers");
+                    return;
+                }
+
+                // Perform calculation
+                if (operator === "add") {
+                    result = n1 + n2;
+                } else if (operator === "subtract") {
+                    result = n1 - n2;
+                } else if (operator === "multiply") {
+                    result = n1 * n2;
+                } else if (operator === "divide") {
+                    // Prevent division by zero
+                    if (n2 === 0) {
+                        $("#calc-result").text("Cannot divide by 0");
+                        return;
+                    }
+                    result = n1 / n2;
+                }
+
+                // Display the result
+                $("#calc-result").text(result);
+
+                });
+        });
+            
+            
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="excercises.html" class="btn">Excercises</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <h2> Lab 2 - jQuery Calculator</h2>
+        <input type="number" id="num1" placeholder="0" style="padding: 5px; width: 80px;">
+            
+            <select id="operator" style="padding: 5px; margin: 0 10px;">
+                <option value="add">+</option>
+                <option value="subtract">-</option>
+                <option value="multiply">*</option>
+                <option value="divide">/</option>
+            </select>
+            
+        <input type="number" id="num2" placeholder="0" style="padding: 5px; width: 80px;">
+
+        <button id="btn-calculate" style="padding: 5px 15px; margin-left: 10px;">=</button>
+    
+        <span id="calc-result" style="margin-left: 15px; font-weight: bold; font-size: 18px; color: #2c3e50;"></span>
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>
