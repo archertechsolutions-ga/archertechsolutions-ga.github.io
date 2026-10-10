@@ -19,6 +19,17 @@ h1 {
     font-weight: normal;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 4px;
+}
+
 .degree {
     font-size: 1.5rem;
     font-weight: normal;
@@ -93,14 +104,14 @@ nav {
     max-width: 900px;
     margin: 0 auto 50px auto;
     text-align: justify; /* Matches the blocky text feel of the image */
-    font-size: 1.15rem;
+    font-size: 1rem;
 }
 
 /* Not Justified*/
 .bionj {
     max-width: 900px;
     margin: 0 auto 50px auto;
-    font-size: 1.15rem;
+    font-size: 1rem;
 }
 
 /* Lab page cards */
@@ -159,6 +170,16 @@ nav {
     text-align: center;
     font-size: 18px;
     color: #2c3e50;
+}
+
+/* JSON lab grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    font-family: sans-serif;
+    padding: 20px;
+    text-align: left;
 }
 
 /* Image Gallery */
