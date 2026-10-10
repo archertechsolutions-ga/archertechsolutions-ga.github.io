@@ -9,17 +9,20 @@
     <script>
         $(document).ready(function() {
             
-            // // Part A: Clicking ANY button hides BOTH paragraphs
-            // $(".btnA").click(function() {
-            //     $(".pA").hide();
-            // });
-            // // Part A: Clicking ANY button hides BOTH paragraphs
-            // $("#btnB1").click(function() {
-            //     $("#pB1").hide();
-            // });
-            // $("#btnB2").click(function() {
-            //     $("#pB2").hide();
-            // });
+            // Part A: Clicking ANY button hides BOTH paragraphs
+            $(".btnA").click(function() {
+                $(".pA").hide();
+            });
+            // Part A: Clicking ANY button hides BOTH paragraphs
+            $("#btnB1").click(function() {
+                $("#pB1").hide();
+            });
+            $("#btnB2").click(function() {
+                $("#pB2").hide();
+            });
+            $("#reset").click(function() {
+                $("p").show();
+            });
 
         });
     </script>
@@ -49,22 +52,34 @@
 
     <main>
         <h2>Part A: Hide All</h2>
-        <p class="pA">This is the first paragraph. Clicking either button will hide me.</p>
-        <p class="pA">This is the second paragraph. Clicking either button will hide me too.</p>
+        <p class="bionj pA">This is the first paragraph. Clicking either button will hide me.</p>
+        <p class="bionj pA">This is the second paragraph. Clicking either button will hide me too.</p>
 
         <button class="btnA">Button 1</button>
         <button class="btnA">Button 2</button>
 
         <h2>Part B: Individual Elements</h2>
-        <p id="pB1">This is the first paragraph. Clicking either button will hide me.</p>
-        <p id="pB2">This is the second paragraph. Clicking either button will hide me too.</p>
+        <p class="bionj" id="pB1">This is the first paragraph. Clicking the corresponding button will hide me.</p>
+        <p class="bionj" id="pB2">This is the second paragraph. Clicking the corresponding button will hide me too.</p>
 
         <button id="btnB1">Button 1</button>
         <button id="btnB2">Button 2</button>
 
         <h2>Part C: Explore</h2>
-        <p>If you temporarily remove the $(document).ready(function() { ... }); wrapper from the <head> of your document:</p>
-        <p>1. What happens when you click the buttons? Why?</p>
+        <p class="bio">If you temporarily remove the $(document).ready() wrapper from the header of your document:</p>
+        <p class="bio">1. Does the page still work as expected? No,the buttons no longer have a function. If the script is in the header without $(document).ready(), clicking 
+            the buttons will do nothing. <br><br>
+            2. Does the location of the script affect the result? Yes, if you remove $(document).ready() but move the entire script to the very bottom of the page 
+            the code will work. This is because the browser reads top-to-bottom; by the time it reaches the script at the bottom, the paragraphs and buttons have 
+            already been loaded into the DOM.<br><br>
+            3. Why is $(document).ready() useful? It guarantees that your jQuery code will not run until the DOM is completely loaded and safe to manipulate.
+            This prevents undefined element errors and allows you to keep your scripts neatly organized in the header of your HTML document without worrying about 
+            whether the elements have loaded yet.<br><br>
+        </p>
+
+        <h2>Reset</h2>
+        <!-- This button shows all paragraphs again -->
+        <button id="reset">Reset All Paragraphs</button>
     </main>
 
     <footer>

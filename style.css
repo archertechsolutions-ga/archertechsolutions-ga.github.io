@@ -96,6 +96,56 @@ nav {
     font-size: 1.15rem;
 }
 
+/* Not Justified*/
+.bionj {
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    font-size: 1.15rem;
+}
+
+/* Lab page cards */
+.lab-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto; 
+    max-width: 900px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+/* Styles the link to look like a block/card */
+.lab-card {
+    display: block; 
+    text-decoration: none; 
+    color: inherit; 
+    background-color: #fbf7ec; 
+    border: 1px solid #eadecb; 
+    border-radius: 8px; 
+    padding: 15px 20px;
+    transition: all 0.3s ease; 
+}
+
+/* Hover effect */
+.lab-card:hover {
+    background-color: #f2e6ce; 
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
+}
+
+/* Styles the Lab Title */
+.lab-card h3 {
+    margin: 0 0 8px 0; 
+    color: #2c3e50; 
+}
+
+/* Styles the Lab Synopsis */
+.lab-card p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+}
+
 /* Image Gallery */
 .image-gallery {
     display: flex;
