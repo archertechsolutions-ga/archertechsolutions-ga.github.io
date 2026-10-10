@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery ready() and Event Handling</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            // // Part A: Clicking ANY button hides BOTH paragraphs
+            // $(".btnA").click(function() {
+            //     $(".pA").hide();
+            // });
+            // // Part A: Clicking ANY button hides BOTH paragraphs
+            // $("#btnB1").click(function() {
+            //     $("#pB1").hide();
+            // });
+            // $("#btnB2").click(function() {
+            //     $("#pB2").hide();
+            // });
+
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="excercises.html" class="btn">Excercises</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <h2>Part A: Hide All</h2>
+        <p class="pA">This is the first paragraph. Clicking either button will hide me.</p>
+        <p class="pA">This is the second paragraph. Clicking either button will hide me too.</p>
+
+        <button class="btnA">Button 1</button>
+        <button class="btnA">Button 2</button>
+
+        <h2>Part B: Individual Elements</h2>
+        <p id="pB1">This is the first paragraph. Clicking either button will hide me.</p>
+        <p id="pB2">This is the second paragraph. Clicking either button will hide me too.</p>
+
+        <button id="btnB1">Button 1</button>
+        <button id="btnB2">Button 2</button>
+
+        <h2>Part C: Explore</h2>
+        <p>If you temporarily remove the $(document).ready(function() { ... }); wrapper from the <head> of your document:</p>
+        <p>1. What happens when you click the buttons? Why?</p>
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>
