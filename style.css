@@ -145,6 +145,21 @@ nav {
     color: #555;
     line-height: 1.5;
 }
+/* style for table in lab 2 */
+.random-table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fdf6e3;
+}
+
+/* Styles the individual table cells */
+.random-table td {
+    border: 1px solid #a0a0a0; 
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 18px;
+    color: #2c3e50;
+}
 
 /* Image Gallery */
 .image-gallery {

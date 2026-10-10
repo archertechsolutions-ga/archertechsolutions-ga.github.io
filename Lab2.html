@@ -34,6 +34,24 @@
                     $(".sec2A").slideDown();
                 });
             });
+            // Apply styles to the odd rows of tables
+            $("#btn-style-odd").click(function() {
+                $(".random-table tr:nth-child(odd) td").css({
+                    "background-color": "orange",
+                    "font-style": "italic",
+                    "border": "2px dotted black" 
+                });
+            });
+            // Reset the table back to the original CSS
+            $("#btn-reset-table").click(function() {
+                $(".random-table tr td").removeAttr("style");
+                // 2. Make all rows visible again
+                $(".random-table tr").show();
+            });
+            // Hide the specific row that is clicked
+            $(".random-table tr").click(function() {
+                $(this).hide();
+            });
 
         });
     </script>
@@ -92,11 +110,33 @@
             <h2>Reset</h2>
             <!-- This button shows all paragraphs again -->
             <button id="reset">Reset All Paragraphs</button>
+            <h2>Continue</h2>
             <!-- This button moves to the next section -->
             <button id="transition2A">Move to next section</button>
         </div>
         <div class="Sec2B">
-
+            <h2>Table of Random Numbers</h2>
+            <table class="random-table">
+                <tbody>
+                    <tr>
+                        <td>42</td><td>17</td><td>88</td><td>5</td><td>73</td>
+                    </tr>
+                    <tr>
+                        <td>91</td><td>24</td><td>56</td><td>39</td><td>12</td>
+                    </tr>
+                    <tr>
+                        <td>8</td><td>77</td><td>34</td><td>61</td><td>95</td>
+                    </tr>
+                    <tr>
+                        <td>49</td><td>3</td><td>82</td><td>27</td><td>68</td>
+                    </tr>
+                    <tr>
+                        <td>14</td><td>53</td><td>99</td><td>41</td><td>22</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="btn-style-odd">Style Odd Rows</button>
+            <button id="btn-reset-table">Reset Table</button>
             <button id="transition2B">Return to Previous section</button>
         </div>
     </main>
