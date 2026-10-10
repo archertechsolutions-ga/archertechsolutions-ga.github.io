@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON usage</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".sec3B").hide();
+            $(".sec3C").hide();
+
+            $("#transition3A").click(function() {
+                $(".sec3A").slideUp("slow", function() {
+                    $(".sec3B").slideDown();
+                });
+            });
+            $("#transition3B").click(function() {
+                $(".sec3B").slideUp("slow", function() {
+                    $(".sec3A").slideDown();
+                });
+            });
+            $("#transition3C").click(function() {
+                $(".sec3B").slideUp("slow", function() {
+                    $(".sec3C").slideDown();
+                });
+            });
+            $("#transition3D").click(function() {
+                $(".sec3C").slideUp("slow", function() {
+                    $(".sec3B").slideDown();
+                });
+            });
+            $("#transition3E").click(function() {
+                $(".sec3C").slideUp("slow", function() {
+                    $(".sec3A").slideDown();
+                });
+            });
+        });
+            
+            
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="excercises.html" class="btn">Excercises</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div class="sec3A">
+            <h2> Lab 3 - JSON Usage</h2>
+            <p>Analyze <a href="https://openlibrary.org/books/OL7353617M.json">this</a> JSON file to answer the following questions:</p>
+            <h2>JSON Data Analysis</h2>
+            <h3>What is the main structure of the JSON data?</h3>
+            <p class="bio">The main structure is a single, root-level JSON Object that is enclosed in curly braces. It acts as a metadata record containing various properties, 
+                Key-value pairs. This specific JSON object is about a book, the "Fantastic Mr. Fox”. </p>
+            <h3>What are some of the main keys?</h3>
+            <p class="bio">Main keys include "title", "authors", "publish_date", "publishers", "isbn_10", "isbn_13", and "identifiers".</p>
+            <h3>Which values are simple values such as text or numbers?</h3>
+            <p class="bio">Text: "Fantastic Mr. Fox" (for the key "title"), "October 1, 1988" ("publish_date"), "/books/OL7353617M" ("key"), "fantasticmrfoxpu00roal" ("ocaid").
+                <br>Numbers: 96 ("number_of_pages"), 28 ("latest_revision"), 28 ("revision").</p>
+            <h3>Which values contain collections of data?</h3>
+            <p class="bio">Keys that hold Arrays, enclosed in square brackets, contain collections of data. Examples include: "publishers", "covers", "source_records", and "local_id”.</p>
+            <h3>Which values contain additional structured data inside them?</h3> 
+            <p class="bio">Keys that hold Objects contain additional structured data. Examples include: "identifiers", "type", "first_sentence", "created", and "last_modified".</p>
+            <h3>Are there nested objects or arrays?</h3>
+            <p class="bio">An array containing objects: "authors": [{"key": "/authors/OL34184A"}] 
+                <br>An object containing arrays: "identifiers": {"goodreads": ["1507552"], "librarything": ["6446"]}</p>
+            <h3>How would you describe the overall organization of the data?</h3>
+            <p class="bio">The data is organized hierarchically as a comprehensive catalog record. The top level consists of descriptive keys, where simple attributes (like title or page 
+                count) use basic string/number values, while complex or multiple attributes (like authors, identifiers, or creation dates) branch out into nested lists (arrays) and 
+                groupings (objects).</p>
+            <button id="transition3A">Move to next section</button>
+        </div>
+        <div class="sec3B">
+            <h2>Convert the following structured information into valid JSON:</h2>
+            <div class="grid-container">
+                <!-- Left Column Request -->
+                <div>
+                    <p><strong>Message</strong></p>
+                    <ul>
+                        <li>To: Alex</li>
+                        <li>From: Jordan</li>
+                        <li>Heading: Reminder</li>
+                        <li>Body: Don't forget our meeting tomorrow.</li>
+                    </ul>
+                </div>
+
+                <!-- Right Column JSON conversion -->
+                <div>
+                    <pre><code>
+                    {
+                    {
+                    "message":
+                    "to": "Alex",
+                    "from": "Jordan",
+                    "heading": "Reminder",
+                    "body": "Don't forget our meeting tomorrow."
+                    }
+                    }</code></pre>
+                </div>
+
+            </div>
+            <button id="transition3B">Return to Previous section</button>
+            <button id="transition3C">Move to next section</button>
+        </div>
+        <div class="sec3C">
+            <h2>Convert the following structured information into valid JSON:</h2>
+            <div class="grid-container">
+                <!-- Left Column Request -->
+                <div>
+                    <p>Create JSON representing the following collection of books:</p>
+                    
+                    <p><strong>Book 1</strong></p>
+                    <ul>
+                        <li>Title: Web Development Basics</li>
+                        <li>Author: Maya Lee</li>
+                        <li>Price: 29.99</li>
+                    </ul>
+                    
+                    <p><strong>Book 2</strong></p>
+                    <ul>
+                        <li>Title: Modern JavaScript</li>
+                        <li>Author: Daniel Kim</li>
+                        <li>Price: 34.50</li>
+                    </ul>
+                    
+                    <p><strong>Book 3</strong></p>
+                    <ul>
+                        <li>Title: Understanding JSON</li>
+                        <li>Author: Sofia Patel</li>
+                        <li>Price: 24.95</li>
+                    </ul>
+                </div>
+
+                <!-- Right Column JSON conversion -->
+                <div>
+                    <pre><code>[
+                        {
+                            "Title": "Web Development Basics",
+                            "Author": "Maya Lee",
+                            "Price": 29.99
+                        },
+                        {
+                            "Title": "Modern JavaScript",
+                            "Author": "Daniel Kim",
+                            "Price": 34.50
+                        },
+                        {
+                            "Title": "Understanding JSON",
+                            "Author": "Sofia Patel",
+                            "Price": 24.95
+                        }
+                        ]</code></pre>
+                </div>
+            </div>
+            <button id="transition3D">Return to Previous section</button>
+            <button id="transition3E">Return to beginning</button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>

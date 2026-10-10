@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery ready() and Event Handling</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const images = [
+                { src: "PXL_20260625_145154627.TS-000.jpg", alt: "My Family", caption: "Picture of my Grandfather, Sister, Nephew and Myself" },
+                { src: "PXL_20260711_235148332.TS-000.MP.jpg", alt: "More Family!", caption: "Picture of my boyfriend, friend Sharon, and my sister and brother-in-law" },
+                { src: "PXL_20260805_202501013.jpg", alt: "My Frollo", caption: "My sweet boy Frollo" },
+                { src: "PXL_20260811_001851429.jpg", alt: "Sir Hermes", caption: "Mister Hermes aka the Ham" },
+                { src: "PXL_20260924_230313827.MP.jpg", alt: "The Fleet", caption: "Most of my cars... There are always more!" }
+            ];
+
+            let currentIndex = 0;
+
+            // Function to handle the fade effect and data updating
+            function updateGallery() {
+                // Fade out the current image (takes 300 milliseconds)
+                $("#gallery-img").fadeOut(300, function() {
+                    
+                    // Once faded out, update the image source, alt text, caption, and counter
+                    $(this).attr("src", images[currentIndex].src);
+                    $(this).attr("alt", images[currentIndex].alt);
+                    $("#gallery-caption").text(images[currentIndex].caption);
+                    $("#image-counter").text((currentIndex + 1) + " / " + images.length);
+                    
+                    // Fade the new image back in
+                    $(this).fadeIn(300);
+                });
+            }
+
+            // Next Button Click Event
+            $("#btn-next").click(function() {
+                currentIndex++;
+                // If we go past the last image, loop back to the first (Index 0)
+                if (currentIndex >= images.length) {
+                    currentIndex = 0; 
+                }
+                updateGallery();
+            });
+
+            // Previous Button Click Event
+            $("#btn-prev").click(function() {
+                currentIndex--;
+                // If we go before the first image, loop to the last image
+                if (currentIndex < 0) {
+                    currentIndex = images.length - 1; 
+                }
+                updateGallery();
+            });
+
+            // Enhancement: Keyboard Navigation
+            $(document).keydown(function(e) {
+                if (e.key === "ArrowRight") {
+                    $("#btn-next").click();
+                } else if (e.key === "ArrowLeft") {
+                    $("#btn-prev").click();
+                }
+            });
+        });
+            
+            
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="excercises.html" class="btn">Excercises</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <h2> Lab 2 - jQuery Picture Viewer</h2>
+        <div id="picview" style="text-align: center; margin: 20px auto; max-width: 600px; background-color: #fdf6e3; padding: 20px; border-radius: 8px; border: 1px solid #a0a0a0;">
+            <!-- Enhancement: Image Counter -->
+            <div id="image-counter" style="margin-bottom: 10px; font-weight: bold; color: #555;">1 / 5</div>
+            
+            <!-- Image Container -->
+            <div style="height: 400px; display: flex; align-items: center; justify-content: center; background-color: #2c3e50; border-radius: 4px; overflow: hidden;">
+                <img id="gallery-img" src="PXL_20260625_145154627.TS-000.jpg" alt="My Family" style="max-width: 100%; max-height: 100%; display: block;">
+            </div>
+
+            <!-- Image Caption -->
+            <p id="gallery-caption" style="margin: 15px 0; font-style: italic; color: #2c3e50;">Picture of my Grandfather, Sister, Nephew and Myself</p>
+            
+            <!-- Navigation Buttons -->
+            <button id="btn-prev" style="padding: 8px 15px; margin: 5px;">&laquo; Previous</button>
+            <button id="btn-next" style="padding: 8px 15px; margin: 5px;">Next &raquo;</button>
+            <p style="font-size: 12px; color: #777;"><em>Hint: You can also use your keyboard arrow keys!</em></p>
+        </div>
+        
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>

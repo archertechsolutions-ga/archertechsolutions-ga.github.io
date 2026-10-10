@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery ready() and Event Handling</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // The second div needs to be hidden on load
+            $(".Sec2B").hide();
+            // Part A: Clicking ANY button hides BOTH paragraphs
+            $(".btnA").click(function() {
+                $(".pA").hide();
+            });
+            // Part B: Clicking the right button hides the corresponding paragraph
+            $("#btnB1").click(function() {
+                $("#pB1").hide();
+            });
+            $("#btnB2").click(function() {
+                $("#pB2").hide();
+            });
+            $("#reset").click(function() {
+                $("p").show();
+            });
+            $("#transition2A").click(function() {
+                $(".sec2A").slideUp("slow", function() {
+                    $(".Sec2B").slideDown();
+                });
+            });
+            $("#transition2B").click(function() {
+                $(".Sec2B").slideUp("slow", function() {
+                    $(".sec2A").slideDown();
+                });
+            });
+            // Apply styles to the odd rows of tables
+            $("#btn-style-odd").click(function() {
+                $(".random-table tr:nth-child(odd) td").css({
+                    "background-color": "orange",
+                    "font-style": "italic",
+                    "border": "2px dotted black" 
+                });
+            });
+            // Reset the table back to the original CSS
+            $("#btn-reset-table").click(function() {
+                $(".random-table tr td").removeAttr("style");
+                // 2. Make all rows visible again
+                $(".random-table tr").show();
+            });
+            // Hide the specific row that is clicked
+            $(".random-table tr").click(function() {
+                $(this).hide();
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="excercises.html" class="btn">Excercises</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div class="sec2A"> <!---Added this into divs to use a transition-->
+            <h2>Part A: Hide All</h2>
+            <p class="bionj pA">This is the first paragraph. Clicking either button will hide me.</p>
+            <p class="bionj pA">This is the second paragraph. Clicking either button will hide me too.</p>
+
+            <button class="btnA">Button 1</button>
+            <button class="btnA">Button 2</button>
+
+            <h2>Part B: Individual Elements</h2>
+            <p class="bionj" id="pB1">This is the first paragraph. Clicking the corresponding button will hide me.</p>
+            <p class="bionj" id="pB2">This is the second paragraph. Clicking the corresponding button will hide me too.</p>
+
+            <button id="btnB1">Button 1</button>
+            <button id="btnB2">Button 2</button>
+
+            <h2>Part C: Explore</h2>
+            <p class="bio">If you temporarily remove the $(document).ready() wrapper from the header of your document:</p>
+            <p class="bio">1. Does the page still work as expected? No,the buttons no longer have a function. If the script is in the header without $(document).ready(), clicking 
+                the buttons will do nothing. <br><br>
+                2. Does the location of the script affect the result? Yes, if you remove $(document).ready() but move the entire script to the very bottom of the page 
+                the code will work. This is because the browser reads top-to-bottom; by the time it reaches the script at the bottom, the paragraphs and buttons have 
+                already been loaded into the DOM.<br><br>
+                3. Why is $(document).ready() useful? It guarantees that your jQuery code will not run until the DOM is completely loaded and safe to manipulate.
+                This prevents undefined element errors and allows you to keep your scripts neatly organized in the header of your HTML document without worrying about 
+                whether the elements have loaded yet.<br><br>
+            </p>
+
+            <h2>Reset</h2>
+            <!-- This button shows all paragraphs again -->
+            <button id="reset">Reset All Paragraphs</button>
+            <h2>Continue</h2>
+            <!-- This button moves to the next section -->
+            <button id="transition2A">Move to next section</button>
+        </div>
+        <div class="Sec2B">
+            <h2>Table of Random Numbers</h2>
+            <table class="random-table">
+                <tbody>
+                    <tr>
+                        <td>42</td><td>17</td><td>88</td><td>5</td><td>73</td>
+                    </tr>
+                    <tr>
+                        <td>91</td><td>24</td><td>56</td><td>39</td><td>12</td>
+                    </tr>
+                    <tr>
+                        <td>8</td><td>77</td><td>34</td><td>61</td><td>95</td>
+                    </tr>
+                    <tr>
+                        <td>49</td><td>3</td><td>82</td><td>27</td><td>68</td>
+                    </tr>
+                    <tr>
+                        <td>14</td><td>53</td><td>99</td><td>41</td><td>22</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="btn-style-odd">Style Odd Rows</button>
+            <button id="btn-reset-table">Reset Table</button>
+            <button id="transition2B">Return to Previous section</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>
