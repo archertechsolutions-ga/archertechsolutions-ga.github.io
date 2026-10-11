@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone 1</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $(".sec4B").hide();
+        $("#transition4A").click(function() {
+            $(".sec4A").slideUp("slow", function() {
+                $(".sec4B").slideDown();
+            });
+        });
+        $('#submit').click(function(e) {
+            var jsonUrl = $('#jsonInput').val();
+            if(jsonUrl) {
+                // Clear out the table
+                $('#jsonTable tbody').empty();
+                // Fetch the JSON data
+                $.getJSON(jsonUrl, function(data) {
+                    $.each(data, function(key, value) {
+                        // Stringify arrays 
+                        var displayValue = (typeof value === 'object' && value !== null) 
+                            ? JSON.stringify(value) 
+                            : value;
+                        // Construct the row
+                        var row = '<tr>' +
+                                    '<td><strong>' + key + '</strong></td>' +
+                                    '<td>' + displayValue + '</td>' +
+                                '</tr>';
+                        // Append the row to the table
+                        $('#jsonTable tbody').append(row);
+                    });
+                })
+            } 
+            else {
+                alert("Please paste a valid JSON URL.");
+            }
+        });
+        $('#submit1').click(function(e) {
+            var jsonUrl1 = $('#jsonInput1').val();
+            if(jsonUrl1) {
+                $('#jsonTable1 tbody').empty();
+                $.getJSON(jsonUrl1, function(data) {
+                    $.each(data.docs, function(index, obj) {
+                        // Adds a separator row between different books
+                        if (index > 0) {
+                            $('#jsonTable1 tbody').append('<tr><td colspan="2" style="background-color: #e0e0e0; text-align: center;"><strong>Record ' 
+                                + (index + 1) + '</strong></td></tr>');
+                        } else if (data.docs.length > 1) {
+                            $('#jsonTable1 tbody').append('<tr><td colspan="2" style="background-color: #e0e0e0; text-align: center;"><strong>Record 1</strong></td></tr>');
+                        }
+                        $.each(obj, function(key, value) {
+                            var displayValue = (typeof value === 'object' && value !== null) 
+                                ? JSON.stringify(value)
+                                : value;
+                            var row = '<tr>' +
+                                        '<td><strong>' + key + '</strong></td>' +
+                                        '<td>' + displayValue + '</td>' +
+                                    '</tr>';
+                                    
+                            $('#jsonTable1 tbody').append(row);
+                        });
+                    });
+                })
+            } 
+            else {
+                alert("Please paste a valid JSON URL.");
+            }
+        });
+        $("#transition4B").click(function() {
+            $(".sec4B").slideUp("slow", function() {
+                $(".sec4A").slideDown();
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="milestones.html" class="btn">Milestones</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div class="sec4A">
+            <!--Made a entry field so any single return from the site will work -->
+            <div style="margin-bottom: 20px;">
+                <label for="jsonInput"><strong>JSON Link:</strong></label>
+                <input type="text" id="jsonInput" placeholder="Paste JSON URL here..." style="width: 300px; padding: 5px;" value="https://openlibrary.org/books/OL7353617M.json">
+                <button id="submit" style="padding: 5px 10px;">Load Data</button>
+            </div>
+
+            <div class="table-container">
+                <table id="jsonTable" class="jsonTable">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th style="width: 30%;">Key</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows will populate here -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="transition4A">Move to next section</button>
+        </div>
+        <div class="sec4B">
+            <div style="margin-bottom: 20px;">
+                <label for="jsonInput1"><strong>JSON Link:</strong></label>
+                <input type="text" id="jsonInput1" placeholder="Paste JSON URL here..." style="width: 300px; padding: 5px;" value="https://openlibrary.org/search.json?q=modern%20web&limit=10">
+                <button id="submit1" style="padding: 5px 10px;">Load Data</button>
+            </div>
+
+            <div class="table-container">
+                <table id="jsonTable1" class="jsonTable">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>Key</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows will populate here -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="transition4B">Move to previous section</button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>

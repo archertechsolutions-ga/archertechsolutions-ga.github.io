@@ -182,6 +182,32 @@ nav {
     text-align: left;
 }
 
+/* Milestone 1 table */
+.jsonTable {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    text-align: left;
+    border: 1px solid #000;
+    table-layout: fixed;
+}
+
+.jsonTable th, 
+    .jsonTable td { /*most of this was just trying to get the table to not stretch and wrap text*/
+        border: 1px solid #000;
+        padding: 8px;
+        word-break: break-all; 
+        word-wrap: break-word; 
+        overflow-wrap: break-word;
+    }
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}    
+
 /* Image Gallery */
 .image-gallery {
     display: flex;
