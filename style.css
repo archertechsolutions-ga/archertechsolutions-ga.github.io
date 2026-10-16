@@ -208,6 +208,11 @@ nav {
     padding: 20px 0;
 }    
 
+.album {
+    max-width: 250px;
+    margin: 0 auto;
+}
+
 /* Image Gallery */
 .image-gallery {
     display: flex;

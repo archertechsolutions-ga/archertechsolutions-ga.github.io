@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 4</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // $.getJSON('https://jsonplaceholder.typicode.com/users/1', function(data) {
+            //     $('#userInfo').html('<h2>User Information</h2>' +
+            //         '<p><strong>Name:</strong> ' + data.name + '</p>' +
+            //         '<p><strong>Username:</strong> ' + data.username + '</p>' +
+            //         '<p><strong>Email:</strong> ' + data.email + '</p>' +
+            //         '<p><strong>Address:</strong> ' + data.address.street + ', ' + data.address.suite + ', ' + data.address.city + ', ' + data.address.zipcode + '</p>' +
+            //         '<p><strong>Phone:</strong> ' + data.phone + '</p>' +
+            //         '<p><strong>Website:</strong> <a href="http://' + data.website + '" target="_blank">' + data.website + '</a></p>' +
+            //         '<p><strong>Company:</strong> ' + data.company.name + '</p>');
+            // });
+            var jsonUrl = 'https://jsonplaceholder.typicode.com/users/1';
+            $.ajax({
+                url: jsonUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#userInfo').html('<h2>User Information</h2>' +
+                        '<p><strong>Name:</strong> ' + data.name + '</p>' +
+                        '<p><strong>Username:</strong> ' + data.username + '</p>' +
+                        '<p><strong>Email:</strong> ' + data.email + '</p>' +
+                        '<p><strong>Address:</strong> ' + data.address.street + ', ' + data.address.suite + ', ' + data.address.city + ', ' + data.address.zipcode + '</p>' +
+                        '<p><strong>Phone:</strong> ' + data.phone + '</p>' +
+                        '<p><strong>Website:</strong> <a href="http://' + data.website + '" target="_blank">' + data.website + '</a></p>' +
+                        '<p><strong>Company:</strong> ' + data.company.name + '</p>');
+                },
+                error: function() {
+                    $('#userInfo').html('<p>Error fetching user information.</p>');
+                }
+            });
+            var jsonUrl1 = 'https://jsonplaceholder.typicode.com/albums?userId=1';
+            var albumInfo = $('#albumInfo');
+            $.ajax({
+                url: jsonUrl1,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data, function(i, album) {
+                        let albumUrl = `album.html?id=${encodeURIComponent(album.id)}`;     
+                        albumInfo.append('<li><a href="' + albumUrl + '">' + album.title + '</a></li>');
+                    });
+                },
+                error: function() {
+                    $('#albumInfo').html('<p>Error fetching album information.</p>');
+                }
+            });
+        });
+    
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="milestones.html" class="btn">Milestones</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div id="userInfo"></div>
+
+        <div class="line-separator-long"></div>
+
+        <div id="album">
+            <h2>Albums</h2>
+            <ul id="albumInfo"></ul>
+        </div>
+
+
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>

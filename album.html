@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 4</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var sp = window.location.search;
+            var params = new URLSearchParams(sp);
+            var albumId = params.get('id');
+            var jsonUrl = 'https://jsonplaceholder.typicode.com/photos/' + albumId
+
+            var albumInfo = $('#albumInfo');
+            $.ajax({
+                url: jsonUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    albumInfo.append('<h2>Album Details</h2>' +
+                        '<p><strong>Album ID:</strong> ' + data.id + '</p>' +
+                        '<p><strong>Title:</strong> ' + data.title + '</p>' +
+                        '<p><strong>Album Art</strong>: <br><img src="' + data.thumbnailUrl + '" alt="Album Art"></p>');
+                },
+                error: function() {
+                    $('#albumInfo').html('<p>Error fetching album information.</p>');
+                }
+            });
+        });
+    
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="milestones.html" class="btn">Milestones</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div id="album">
+            <ul id="albumInfo" class="album"></ul>
+        </div>
+
+
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>
