@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone 2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#submit').click(function() {
+                var jsonUrl = url="https://openlibrary.org/search.json?q=" + encodeURIComponent($('#searchInput').val());
+                var searchResults = $('#searchResults');
+                var page = 1;
+                var perpage = 6;
+                var fullData = [];
+                $.ajax({
+                    url: jsonUrl,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        searchResults.empty();
+                        page = 1;
+                        perpage = parseInt($('#resultsLimit').val());
+                        len = data.docs.slice(0, 60).length;
+                        $('#resultsCount').text(`Found ${len} results`);
+                        pageCount = Math.ceil(len / perpage);
+                        $.each(data.docs.slice(0, 60), function(i, book) {
+                            var book1 = "";
+                            if(data.docs[i].cover_i)
+                                {
+                                    var cover = "https://covers.openlibrary.org/b/id/" + data.docs[i].cover_i + "-M.jpg";
+                                    book1 += "<img class='booklistitem' data-bookid='" + data.docs[i].key + "'src='" + cover + "' alt='Book Cover'/>";
+                                }
+                            let bookUrl = `book.html?id=${encodeURIComponent(book.key)}`; 
+                            fullData.push('<li><a href="' + bookUrl + '">' + book1 + book.title + '</a></li>');
+                        });
+                        let booksToShow = fullData.slice(0, perpage);
+                        searchResults.append(booksToShow);
+                        $('#pageNav').empty();
+                        $('#pageNav').append('<p>' + pageCount + ' pages</p>');
+                        for (let i = 1; i <= pageCount; i++) {
+                            $('#pageNav').append('<button class="pageBtn" data-page="' + i + '">' + i + '</button>');
+                        }
+                    },
+                    error: function() {
+                        $('#searchResults').html('<p>Error fetching search results.</p>');
+                    }
+                });
+                $(document).on('click', '.pageBtn', function() {
+                $('#searchResults').empty();
+                let perpage = parseInt($('#resultsLimit').val());
+                let page = parseInt($(this).data('page'));
+                let start = perpage * (page - 1);
+                let end = start + perpage;
+                let booksToShow = fullData.slice(start, end);
+                console.log(booksToShow);
+                //searchResults.append(booksToShow);
+                $('#searchResults').append(booksToShow.join(''));
+                });
+            });
+        });
+    
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="milestones.html" class="btn">Milestones</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div id="search-container">
+            <label for="searchInput"><strong>Search Here:</strong></label>
+            <input type="text" id="searchInput" placeholder= 'Search for Books!' style="width: 300px; padding: 5px;">
+            <button id="submit" style="padding: 5px 10px;">Load Data</button>
+        </div>
+        <div id="results-container">
+            <label for="resultsLimit">Results per page:</label>
+            <select id="resultsLimit">
+                <option value="6">6</option>
+                <option value="12">12</option>
+                <option value="18">18</option>
+            </select>
+            <h2>Results</h2>
+            <h3 id="resultsCount"></h3>
+            <ul id="searchResults"></ul>
+            <div id="pageNav"></div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>
