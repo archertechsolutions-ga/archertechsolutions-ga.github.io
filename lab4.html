@@ -9,16 +9,6 @@
 
     <script>
         $(document).ready(function() {
-            // $.getJSON('https://jsonplaceholder.typicode.com/users/1', function(data) {
-            //     $('#userInfo').html('<h2>User Information</h2>' +
-            //         '<p><strong>Name:</strong> ' + data.name + '</p>' +
-            //         '<p><strong>Username:</strong> ' + data.username + '</p>' +
-            //         '<p><strong>Email:</strong> ' + data.email + '</p>' +
-            //         '<p><strong>Address:</strong> ' + data.address.street + ', ' + data.address.suite + ', ' + data.address.city + ', ' + data.address.zipcode + '</p>' +
-            //         '<p><strong>Phone:</strong> ' + data.phone + '</p>' +
-            //         '<p><strong>Website:</strong> <a href="http://' + data.website + '" target="_blank">' + data.website + '</a></p>' +
-            //         '<p><strong>Company:</strong> ' + data.company.name + '</p>');
-            // });
             var jsonUrl = 'https://jsonplaceholder.typicode.com/users/1';
             $.ajax({
                 url: jsonUrl,

@@ -19,6 +19,7 @@
                     url: jsonUrl,
                     method: 'GET',
                     dataType: 'json',
+                    headers: {"user-Agent": "App for IT4403 KSU (tweed1@students.kennesaw.edu)"},
                     success: function(data) {
                         searchResults.empty();
                         page = 1;
@@ -33,8 +34,8 @@
                                     var cover = "https://covers.openlibrary.org/b/id/" + data.docs[i].cover_i + "-M.jpg";
                                     book1 += "<img class='booklistitem' data-bookid='" + data.docs[i].key + "'src='" + cover + "' alt='Book Cover'/>";
                                 }
-                            let bookUrl = `book.html?id=${encodeURIComponent(book.key)}`; 
-                            fullData.push('<li><a href="' + bookUrl + '">' + book1 + book.title + '</a></li>');
+                            let bookUrl = `book.html?q=${book.key}`; 
+                            fullData.push('<li><a href="' + bookUrl + '">' + book1 + '<br>' + book.title + '</a></li>');
                         });
                         let booksToShow = fullData.slice(0, perpage);
                         searchResults.append(booksToShow);
@@ -46,18 +47,21 @@
                     },
                     error: function() {
                         $('#searchResults').html('<p>Error fetching search results.</p>');
+                        console.log(data.error)
                     }
                 });
                 $(document).on('click', '.pageBtn', function() {
-                $('#searchResults').empty();
-                let perpage = parseInt($('#resultsLimit').val());
-                let page = parseInt($(this).data('page'));
-                let start = perpage * (page - 1);
-                let end = start + perpage;
-                let booksToShow = fullData.slice(start, end);
-                console.log(booksToShow);
-                //searchResults.append(booksToShow);
-                $('#searchResults').append(booksToShow.join(''));
+                    $('#searchResults').empty();
+                    let perpage = parseInt($('#resultsLimit').val());
+                    let page = parseInt($(this).data('page'));
+                    let start = 0;
+                    let end = start + perpage;
+                    let booksToShow = fullData.slice(start, end);
+                    console.log(booksToShow);
+                    $('#searchResults').append(booksToShow.join(''));
+                });
+                $(document).on('change' , '#resultsLimit', function() {
+                    $('#submit').trigger('click');
                 });
             });
         });

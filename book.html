@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(document).ready(function() {
+            var sp = window.location.search;
+            var trim = sp.slice(4);
+            var jsonUrl = 'https://openlibrary.org/' + trim;
+            console.log(jsonUrl);
+            var bookInfo = $('#bookInfo');
+            $.ajax({
+                url: jsonUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    cponsole.log(data);
+                    var cover = "https://covers.openlibrary.org/b/id/" + data.covers[0] + "-L.jpg";
+                    console.log(cover);
+                    bookInfo.append('<h2>Book Details</h2>' +
+                        '<p><strong>Title:</strong> ' + data.docs[0].title + '</p>' +
+                        '<p><strong>Cover Image</strong>: <br><img src="' + cover + '" alt="Cover Image"></p>');
+                },
+                error: function() {
+                    $('#bookInfo').html('<p>Error fetching book information.</p>');
+                }
+            });
+        });
+    });
+    
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Timothy Weed</h1>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="btn">Home</a></li>
+            <span class="divider">|</span>
+            <li><a href="labs.html" class="btn">Labs</a></li>
+            <span class="divider">|</span>
+            <li><a href="milestones.html" class="btn">Milestones</a></li>
+            <span class="divider">|</span>
+            <li><a href="projects.html" class="btn">Projects</a></li>
+            <span class="divider">|</span>
+            <li><a href="contact.html" class="btn">Contact</a></li>
+            <span class="divider">|</span>
+            <li><a href="https://ccse.kennesaw.edu/" class="btn">KSU CCSE</a></li>
+        </ul>
+        <div class="line-separator-long"></div>
+    </nav>
+
+    <main>
+        <div id="userInfo"></div>
+
+        <div class="line-separator-long"></div>
+
+        <div id="book">
+            <h2>Books</h2>
+            <ul id="bookInfo"></ul>
+        </div>
+
+
+
+    </main>
+
+    <footer>
+        <p>This website was made for use in KSU IT 4403 for course projects</p>
+    </footer>
+
+</body>
+</html>
