@@ -14,7 +14,8 @@
         var jsonUrl = 'https://openlibrary.org/' + trim + '.json';
         console.log(jsonUrl);
         var bookInfo = $('#bookInfo');
-        var subjects = []
+        var bookDescription = $('#bookDescription');
+        var subjects = [];
         $.ajax({
             url: jsonUrl,
             method: 'GET',
@@ -23,9 +24,9 @@
                 console.log(data);
                 var cover = "https://covers.openlibrary.org/b/id/" + data.covers[0] + "-L.jpg";
                 console.log(cover);
-                var authorInfo = "https://openlibrary.org/" + data.authors[0].author.key + ".json";
+                var authorInfo = "https://openlibrary.org" + data.authors[0].author.key + ".json";
                 console.log(authorInfo);
-                subjects = data.subjects
+                subjects = data.subjects.slice(0, 10);
                 console.log(subjects)
                 $.getJSON(authorInfo, function(authorData) {
                     var authorName = authorData.personal_name;
@@ -33,11 +34,21 @@
                     bookInfo.append(
                         '<li><strong>Title:</strong> ' + data.title + '</li>' +
                         '<li><strong>Author:</strong> ' + authorName + '</li>' +
-                        '<li><strong>Cover Image</strong>: <br><img src="' + cover + '" alt="Cover Image"></li>' +
-                        '<li><strong>Description:</strong> ' + data.description.value + '</li>'
+                        '<li><strong>Cover Image</strong>: <br><img src="' + cover + '" alt="Cover Image"></li>' //+
+                        // '<li><strong>Description:</strong> ' + data.description.value + '</li>'
                     );
+                    console.log(data.title);
                 });
-                for (var i = 0; i < 10; i++) {
+                if (data.description == null) {
+                    bookDescription.append('<li><strong>Description:</strong>No description found</li>');
+                }
+                else if (data.description.value){
+                    bookDescription.append('<li><strong>Description:</strong> ' + data.description.value + '</li>');
+                }
+                else{
+                    bookDescription.append('<li><strong>Description:</strong> ' + data.description + '</li>');
+                }
+                for (var i = 0; i < data.subjects.slice(0, 10).length; i++) {
                         $('#bookSubjects').append('<li>' + subjects[i] + '</li>');
                     };
                 $('#link').append('https://openlibrary.org/' + trim )
@@ -77,9 +88,10 @@
         <a href="milestone2.html" class="btn">Return to Search</a>
         <br>
         <a href="myBookshelf.html" class="btn">Go to your favorites</a>
-        <br>
+        <br><br>
         <div id="book">
             <ul id="bookInfo"></ul>
+            <ul id="bookDescription"></ul>
             <h3>Subjects</h3>
             <ul id="bookSubjects"></ul>
             <h3>Link</h3>
