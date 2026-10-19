@@ -15,11 +15,12 @@
                 var page = 1;
                 var perpage = 6;
                 var fullData = [];
+                console.log(jsonUrl);
                 $.ajax({
                     url: jsonUrl,
                     method: 'GET',
                     dataType: 'json',
-                    headers: {"user-Agent": "App for IT4403 KSU (tweed1@students.kennesaw.edu)"},
+                    // headers: {"user-Agent": "App for IT4403 KSU (tweed1@students.kennesaw.edu)"},
                     success: function(data) {
                         searchResults.empty();
                         page = 1;
@@ -92,6 +93,8 @@
     </nav>
 
     <main>
+        <a href="myBookshelf.html" class="btn">Go to your favorites</a>
+        <br><br>
         <div id="search-container">
             <label for="searchInput"><strong>Search Here:</strong></label>
             <input type="text" id="searchInput" placeholder= 'Search for Books!' style="width: 300px; padding: 5px;">

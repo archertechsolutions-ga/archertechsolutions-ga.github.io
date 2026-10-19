@@ -9,46 +9,42 @@
 
     <script>
         $(document).ready(function() {
-            $(document).ready(function() {
-            var sp = window.location.search;
-            var trim = sp.slice(4);
-            var jsonUrl = 'https://openlibrary.org/' + trim + '.json';
-            console.log(jsonUrl);
-            var bookInfo = $('#bookInfo');
-            $.ajax({
-                url: jsonUrl,
-                method: 'GET',
-                dataType: 'json',
-                // headers: {"user-Agent": "App for IT4403 KSU (tweed1@students.kennesaw.edu)"},
-                success: function(data) {
-                    cponsole.log(data);
-                    var cover = "https://covers.openlibrary.org/b/id/" + data.covers[0] + "-L.jpg";
-                    console.log(cover);
-                    $.getJSON("https://openlibrary.org/search" + data.authors[0].key + ".json", function(authorData) {
-                        var authorName = authorData.docs[0].name;
-                        console.log(authorName);
-                        bookInfo.append(
-                            '<li><strong>Title:</strong> ' + data.title + '</li>' +
-                            '<li><strong>Author:</strong> ' + authorName + '</li>' +
-                            '<li><strong>Cover Image</strong>: <br><img src="' + cover + '" alt="Cover Image"></li>' +
-                            '<li><strong>Description:</strong> ' + data.description.value + '</li>'
-                        );
-                    });
+        var sp = window.location.search;
+        var trim = sp.slice(4);
+        var jsonUrl = 'https://openlibrary.org/' + trim + '.json';
+        console.log(jsonUrl);
+        var bookInfo = $('#bookInfo');
+        var subjects = []
+        $.ajax({
+            url: jsonUrl,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var cover = "https://covers.openlibrary.org/b/id/" + data.covers[0] + "-L.jpg";
+                console.log(cover);
+                var authorInfo = "https://openlibrary.org/" + data.authors[0].author.key + ".json";
+                console.log(authorInfo);
+                subjects = data.subjects
+                console.log(subjects)
+                $.getJSON(authorInfo, function(authorData) {
+                    var authorName = authorData.personal_name;
+                    console.log(authorName);
                     bookInfo.append(
-                        '<li><strong>Title:</strong> ' + data.docs[0].title + '</li>' +
+                        '<li><strong>Title:</strong> ' + data.title + '</li>' +
                         '<li><strong>Author:</strong> ' + authorName + '</li>' +
                         '<li><strong>Cover Image</strong>: <br><img src="' + cover + '" alt="Cover Image"></li>' +
                         '<li><strong>Description:</strong> ' + data.description.value + '</li>'
-
                     );
-                    $.each(data.subjects.slice(0, 10), function(index, subject) {
-                        $('#bookSubjects').append('<li>' + subject + '</li>');
-                    });
-                },
-                error: function() {
-                    $('#bookInfo').html('<p>Error fetching book information.</p>');
-                }
-            });
+                });
+                for (var i = 0; i < 10; i++) {
+                        $('#bookSubjects').append('<li>' + subjects[i] + '</li>');
+                    };
+                $('#link').append('https://openlibrary.org/' + trim )
+            },
+            error: function() {
+                $('#bookInfo').html('<p>Error fetching book information.</p>');
+            }
         });
     });
     
@@ -78,15 +74,16 @@
     </nav>
 
     <main>
-        <div id="userInfo"></div>
-
-        <div class="line-separator-long"></div>
-
+        <a href="milestone2.html" class="btn">Return to Search</a>
+        <br>
+        <a href="myBookshelf.html" class="btn">Go to your favorites</a>
+        <br>
         <div id="book">
-            <h2>Books</h2>
             <ul id="bookInfo"></ul>
             <h3>Subjects</h3>
             <ul id="bookSubjects"></ul>
+            <h3>Link</h3>
+            <p id="link"></p>
         </div>
 
 
